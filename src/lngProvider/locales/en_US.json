@@ -3,6 +3,10 @@
   "sidebar.main": "Main",
   "sidebar.samplePage": "Sample Page",
   "sidebar.dashboard": "Dashboard",
+
+  "sidebar.employees": "Employees",
+  "sidebar.clients": "Clients",
+  "sidebar.account": "My account",
   "sidebar.dashboard.crm": "Crm",
   "sidebar.components": "Components",
   "sidebar.components.general": "General",

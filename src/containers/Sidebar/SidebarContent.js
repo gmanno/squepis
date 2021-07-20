@@ -30,25 +30,49 @@ const SidebarContent = ({sidebarCollapsed, setSidebarCollapsed}) => {
   const defaultOpenKeys = selectedKeys.split('/')[1];
   return (
     <>
-      <SidebarLogo sidebarCollapsed={sidebarCollapsed} setSidebarCollapsed={setSidebarCollapsed}/>
+      <SidebarLogo
+        sidebarCollapsed={sidebarCollapsed}
+        setSidebarCollapsed={setSidebarCollapsed}
+      />
       <div className="gx-sidebar-content">
-        <div className={`gx-sidebar-notifications ${getNoHeaderClass(navStyle)}`}>
-          <UserProfile/>
-          <AppsNavigation/>
+        <div
+          className={`gx-sidebar-notifications ${getNoHeaderClass(navStyle)}`}
+        >
+          <UserProfile />
+          <AppsNavigation />
         </div>
         <CustomScrollbars className="gx-layout-sider-scrollbar">
           <Menu
             defaultOpenKeys={[defaultOpenKeys]}
             selectedKeys={[selectedKeys]}
-            theme={themeType === THEME_TYPE_LITE ? 'lite' : 'dark'}
-            mode="inline">
-
+            theme={themeType === THEME_TYPE_LITE ? "lite" : "dark"}
+            mode="inline"
+          >
             <Menu.Item key="sample">
-              <Link to="/sample"><i className="icon icon-widgets"/>
-                <span><IntlMessages id="sidebar.samplePage"/></span>
+              <Link to="/sample">
+                <i className="icon icon-widgets" />
+                <span>
+                  <IntlMessages id="sidebar.samplePage" />
+                </span>
               </Link>
             </Menu.Item>
 
+            <Menu.Item key="clients">
+              <Link to="/clients">
+                <i className="icon icon-user-o" />
+                <span>
+                  <IntlMessages id="sidebar.clients" />
+                </span>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="services_categories">
+              <Link to="/services_categories">
+                <i className="icon icon-extra-components" />
+                <span>
+                  <IntlMessages id="sidebar.services_categories" />
+                </span>
+              </Link>
+            </Menu.Item>
           </Menu>
         </CustomScrollbars>
       </div>
