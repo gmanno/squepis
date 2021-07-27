@@ -4,6 +4,10 @@
   "sidebar.samplePage": "Sample Page",
   "sidebar.dashboard": "Dashboard",
 
+  "sidebar.services": "Services",
+  "sidebar.service_categories": "Services Categories",
+  "routes.add.clients": "Client",
+
   "sidebar.employees": "Employees",
   "sidebar.clients": "Clients",
   "sidebar.account": "My account",
@@ -202,8 +206,10 @@
   "testimonials.classic": "Classic",
   "testimonials.standard": "Standard",
   "extraElements.testimonials": "Testimonials",
+  "table.actions": "Options",
   "button.modify": "Modify",
   "button.delete": "Delete",
+  "button.delete.confirm": "Delete record?",
   "pricingTable.basic": "Basic",
   "pricingTable.circle": "Circle",
   "pricingTable.classic": "Classic",

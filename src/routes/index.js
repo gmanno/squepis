@@ -11,8 +11,12 @@ const App = ({ match }) => (
         component={asyncComponent(() => import("./SamplePage"))}
       />
       <Route
-        path={`${match.url}services_categories`}
-        component={asyncComponent(() => import("./ServicesCategories"))}
+        path={`${match.url}service_categories`}
+        component={asyncComponent(() => import("./ServiceCategories"))}
+      />
+      <Route
+        path={`${match.url}clients`}
+        component={asyncComponent(() => import("./Clients"))}
       />
     </Switch>
   </div>

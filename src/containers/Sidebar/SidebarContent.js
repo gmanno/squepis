@@ -1,6 +1,6 @@
 import React from "react";
-import {Menu} from "antd";
-import {Link} from "react-router-dom";
+import { Menu } from "antd";
+import { Link } from "react-router-dom";
 
 import CustomScrollbars from "util/CustomScrollbars";
 import SidebarLogo from "./SidebarLogo";
@@ -9,25 +9,27 @@ import AppsNavigation from "./AppsNavigation";
 import {
   NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR,
   NAV_STYLE_NO_HEADER_MINI_SIDEBAR,
-  THEME_TYPE_LITE
+  THEME_TYPE_LITE,
 } from "../../constants/ThemeSetting";
 import IntlMessages from "../../util/IntlMessages";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
-const SidebarContent = ({sidebarCollapsed, setSidebarCollapsed}) => {
-
-  let {navStyle, themeType} = useSelector(({settings}) => settings);
-  let {pathname} = useSelector(({common}) => common);
+const SidebarContent = ({ sidebarCollapsed, setSidebarCollapsed }) => {
+  let { navStyle, themeType } = useSelector(({ settings }) => settings);
+  let { pathname } = useSelector(({ common }) => common);
 
   const getNoHeaderClass = (navStyle) => {
-    if (navStyle === NAV_STYLE_NO_HEADER_MINI_SIDEBAR || navStyle === NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR) {
+    if (
+      navStyle === NAV_STYLE_NO_HEADER_MINI_SIDEBAR ||
+      navStyle === NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR
+    ) {
       return "gx-no-header-notifications";
     }
     return "";
   };
 
   const selectedKeys = pathname.substr(1);
-  const defaultOpenKeys = selectedKeys.split('/')[1];
+  const defaultOpenKeys = selectedKeys.split("/")[1];
   return (
     <>
       <SidebarLogo
@@ -65,11 +67,11 @@ const SidebarContent = ({sidebarCollapsed, setSidebarCollapsed}) => {
                 </span>
               </Link>
             </Menu.Item>
-            <Menu.Item key="services_categories">
-              <Link to="/services_categories">
+            <Menu.Item key="service_categories">
+              <Link to="/service_categories">
                 <i className="icon icon-extra-components" />
                 <span>
-                  <IntlMessages id="sidebar.services_categories" />
+                  <IntlMessages id="sidebar.service_categories" />
                 </span>
               </Link>
             </Menu.Item>
@@ -82,4 +84,3 @@ const SidebarContent = ({sidebarCollapsed, setSidebarCollapsed}) => {
 
 SidebarContent.propTypes = {};
 export default SidebarContent;
-

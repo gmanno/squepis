@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import IntlMessages from "util/IntlMessages";
+import { useIntl } from "react-intl";
+
 import { Card, Table, Dropdown, Menu, Modal, message, Button } from "antd";
-import { httpClient } from "../../util/Api";
+import { httpClient } from "util/Api";
 import { Link } from "react-router-dom";
 
 const confirm = Modal.confirm;
 
-const List = () => {
+const List = (props) => {
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const url = "service_categories";
+  const intl = useIntl();
+
+  const url = props.url;
 
   const onDelete = (key, e) => {
     e.preventDefault();
 
     const reg = records.filter((item) => item.id === key)[0];
     const registros = records.filter((item) => item.id !== key);
-
     confirm({
-      title: "Deseja excluir o registro?",
+      title: intl.formatMessage({ id: "button.delete.confirm" }),
       content: reg.title,
       okText: "Sim",
       okType: "danger",
@@ -48,7 +51,7 @@ const List = () => {
     return (
       <Menu>
         <Menu.Item>
-          <Link to={"editar/" + rec.id}>
+          <Link to={`${url}/edit/${rec.id}`}>
             <i className="icon icon-edit" />
             <span style={{ paddingLeft: "5px" }}>Editar</span>
           </Link>
@@ -61,7 +64,7 @@ const List = () => {
               onDelete(rec.id, e);
             }}
           >
-            Excluir
+            <IntlMessages id="button.delete" />
           </span>
         </Menu.Item>
       </Menu>
@@ -75,12 +78,25 @@ const List = () => {
       sorter: (a, b) => a.name.localeCompare(b.name),
     },
     {
+      title: "CPF",
+      dataIndex: "cpf",
+      key: "cpf",
+      sorter: (a, b) => a.cpf.localeCompare(b.cpf),
+    },
+    {
+      title: "Telefone",
+      dataIndex: "phone",
+      key: "phone",
+      sorter: (a, b) => a.phone.localeCompare(b.phone),
+    },
+
+    {
       title: "Ações",
       render: (text, record) => (
         <div>
           <Dropdown overlay={submenus(record)}>
             <span className="gx-link ant-dropdown-link">
-              Opções
+              <IntlMessages id="table.actions" />
               <span
                 className="icon icon-menu-down"
                 style={{ paddingLeft: "5px" }}
@@ -92,32 +108,32 @@ const List = () => {
     },
   ];
 
-  const list = () => {
+  const list = useCallback ( () => {
     httpClient.get(url).then(({ status, data }) => {
       if (status === 200) {
         setRecords(data);
-      }else{
+      } else {
         message.error("Ocorreu um erro");
       }
       setLoading(false);
     });
-  };
+  },[url]);
 
   useEffect(() => {
     list();
-  }, []);
+  }, [list]);
 
   return (
     <Card
       className="gx-card"
       title={
         <h2 className="title gx-mb-4">
-          <IntlMessages id="sidebar.services_categories" />
+          <IntlMessages id={`sidebar.${url}`} />
         </h2>
       }
       extra={
         <p className="gx-text-primary gx-mb-0 gx-pointer">
-          <Link to="adicionar">
+          <Link to={`${url}/add`}>
             <Button type="primary">Adicionar</Button>
           </Link>
         </p>

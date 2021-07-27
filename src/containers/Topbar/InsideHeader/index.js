@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Dropdown, Layout, Menu, message, Popover } from "antd";
 import Icon from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,7 +31,7 @@ function handleMenuClick(e) {
 }
 
 const InsideHeader = () => {
-  const [searchText, setSearchText] = useState("");
+  // const [searchText, setSearchText] = useState("");
   const { locale } = useSelector(({ settings }) => settings);
   const { navCollapsed, width } = useSelector(({ common }) => common);
   const dispatch = useDispatch();
@@ -53,9 +53,9 @@ const InsideHeader = () => {
     </CustomScrollbars>
   );
 
-  const updateSearchChatUser = (evt) => {
-    setSearchText(evt.target.value);
-  };
+  // const updateSearchChatUser = (evt) => {
+  //   setSearchText(evt.target.value);
+  // };
 
   return (
     <div className="gx-header-horizontal gx-header-horizontal-dark gx-inside-header-horizontal">
@@ -118,7 +118,6 @@ const InsideHeader = () => {
                           Category <Icon type="down" />
                         </Button>
                       </Dropdown>
-                      
                     </div>
                   }
                   trigger="click"
