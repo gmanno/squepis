@@ -1,5 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Form, Input, Card, Button, message } from "antd";
+import { useIntl } from "react-intl";
+import { cpfMask, phoneMask } from "util/masks";
 
 import { httpClient } from "util/Api";
 
@@ -30,6 +32,7 @@ const Edit = (props) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(true);
   const url = props.url;
+  const intl = useIntl();
 
   const onFinish = (values) => {
     setLoading(true);
@@ -54,7 +57,9 @@ const Edit = (props) => {
         if (status === 200) {
           form.setFieldsValue({
             name: data.result.name,
-            duration: data.result.duration,
+            email: data.result.email,
+            cpf: data.result.cpf,
+            phone: data.result.phone,
           });
         } else {
           message.error("Ocorreu um erro");
@@ -67,8 +72,20 @@ const Edit = (props) => {
     getRecord();
   }, [getRecord]);
 
+  const changeCpf = (e) => {
+    form.setFieldsValue({ cpf: cpfMask(e.target.value) });
+  };
+  const changePhone = (e) => {
+    form.setFieldsValue({ phone: phoneMask(e.target.value) });
+  };
+
   return (
-    <Card className="gx-card" title="Adicionar novo tipo de serviço">
+    <Card
+      className="gx-card"
+      title={`Adicionar novo ${intl.formatMessage({
+        id: `routes.add.${url}`,
+      })}`}
+    >
       <Form
         {...formItemLayout}
         form={form}
@@ -82,23 +99,63 @@ const Edit = (props) => {
           rules={[
             {
               required: true,
-              message: "Insira o nome do tipo de serviço",
+              message: `Insira o nome do ${intl.formatMessage({
+                id: `routes.add.${url}`,
+              })}`,
             },
           ]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          name="duration"
-          label="Duração (em minutos) "
+          name="email"
+          label="E-mail"
           rules={[
             {
+              type: "email",
+              message: `Insira um e-mail válido`,
+            },
+            {
               required: true,
-              message: "Insira a duração do serviço em minutos",
+              message: `Insira o email do ${intl.formatMessage({
+                id: `routes.add.${url}`,
+              })}`,
             },
           ]}
         >
-          <Input />
+          <Input maxLength="120" />
+        </Form.Item>
+        <Form.Item
+          name="cpf"
+          label="CPF"
+          rules={[
+            {
+              required: true,
+              message: `Insira o cpf do ${intl.formatMessage({
+                id: `routes.add.${url}`,
+              })}`,
+            },
+          ]}
+        >
+          <Input maxLength="14" onChange={changeCpf} />
+        </Form.Item>
+        <Form.Item
+          name="phone"
+          label="Telefone"
+          rules={[
+            {
+              pattern: /\(\d{2}\)\s\d{4,5}-?\d{4}/g,
+              message: "Telefone inválido",
+            },
+            {
+              required: true,
+              message: `Insira o telefone do ${intl.formatMessage({
+                id: `routes.add.${url}`,
+              })}`,
+            },
+          ]}
+        >
+          <Input maxLength="15" onChange={changePhone} />
         </Form.Item>
 
         <Form.Item {...tailFormItemLayout}>

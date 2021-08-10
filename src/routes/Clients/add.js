@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Input, Card, Button, message } from "antd";
 import { useIntl } from "react-intl";
 import { httpClient } from "util/Api";
-import { cpfMask } from "util/cpf";
+import { cpfMask, phoneMask } from "util/masks";
 
 const formItemLayout = {
   labelCol: {
@@ -49,6 +49,9 @@ const Add = (props) => {
 
   const changeCpf = (e) => {
     form.setFieldsValue({ cpf: cpfMask(e.target.value) });
+  };
+  const changePhone = (e) => {
+    form.setFieldsValue({ phone: phoneMask(e.target.value) });
   };
 
   return (
@@ -127,7 +130,7 @@ const Add = (props) => {
             },
           ]}
         >
-          <Input maxLength="15" />
+          <Input maxLength="15" onChange={changePhone} />
         </Form.Item>
 
         <Form.Item {...tailFormItemLayout}>

@@ -139,7 +139,7 @@ export const useProvideAuth = () => {
         }
         setLoadingUser(false);
       })
-      .catch(function () {
+      .catch(function (data) {
         localStorage.removeItem('token');
         httpClient.defaults.headers.common['Authorization'] = '';
         setLoadingUser(false);
