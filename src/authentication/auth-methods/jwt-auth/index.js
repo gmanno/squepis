@@ -1,20 +1,22 @@
-import { useEffect, useState } from 'react';
-import {httpClient} from "../../../util/Api";
+import { useEffect, useState } from "react";
+import { httpClient } from "../../../util/Api";
 
+import { useHistory } from "react-router-dom";
 export const useProvideAuth = () => {
   const [authUser, setAuthUser] = useState(null);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [isLoadingUser, setLoadingUser] = useState(true);
   const [isLoading, setLoading] = useState(false);
+  const history = useHistory();
 
   const fetchStart = () => {
     setLoading(true);
-    setError('');
+    setError("");
   };
 
   const fetchSuccess = () => {
     setLoading(false);
-    setError('');
+    setError("");
   };
 
   const fetchError = (error) => {
@@ -25,12 +27,13 @@ export const useProvideAuth = () => {
   const userLogin = (user, callbackFun) => {
     fetchStart();
     httpClient
-      .post('login', user)
+      .post("login", user)
       .then(({ data }) => {
         if (data.result) {
           fetchSuccess();
-          httpClient.defaults.headers.common['Authorization'] = 'Bearer ' + data.token.access_token;
-          localStorage.setItem('token', data.token.access_token);
+          httpClient.defaults.headers.common["Authorization"] =
+            "Bearer " + data.token.access_token;
+          localStorage.setItem("token", data.token.access_token);
           getAuthUser();
           if (callbackFun) callbackFun();
         } else {
@@ -45,12 +48,13 @@ export const useProvideAuth = () => {
   const userSignup = (user, callbackFun) => {
     fetchStart();
     httpClient
-      .post('auth/register', user)
+      .post("auth/register", user)
       .then(({ data }) => {
         if (data.result) {
           fetchSuccess();
-          localStorage.setItem('token', data.token.access_token);
-          httpClient.defaults.headers.common['Authorization'] = 'Bearer ' + data.token.access_token;
+          localStorage.setItem("token", data.token.access_token);
+          httpClient.defaults.headers.common["Authorization"] =
+            "Bearer " + data.token.access_token;
           getAuthUser();
           if (callbackFun) callbackFun();
         } else {
@@ -85,12 +89,12 @@ export const useProvideAuth = () => {
   const userSignOut = (callbackFun) => {
     fetchStart();
     httpClient
-      .post('logout')
+      .post("logout")
       .then(({ data }) => {
         if (data.result) {
           fetchSuccess();
-          httpClient.defaults.headers.common['Authorization'] = '';
-          localStorage.removeItem('token');
+          httpClient.defaults.headers.common["Authorization"] = "";
+          localStorage.removeItem("token");
           setAuthUser(false);
           if (callbackFun) callbackFun();
         } else {
@@ -105,7 +109,7 @@ export const useProvideAuth = () => {
   const getAuthUser = () => {
     fetchStart();
     httpClient
-      .post('me')
+      .post("me")
       .then(({ data }) => {
         if (data.user) {
           fetchSuccess();
@@ -115,7 +119,7 @@ export const useProvideAuth = () => {
         }
       })
       .catch(function (error) {
-        httpClient.defaults.headers.common['Authorization'] = '';
+        httpClient.defaults.headers.common["Authorization"] = "";
         fetchError(error.message);
       });
   };
@@ -126,13 +130,28 @@ export const useProvideAuth = () => {
   // ... latest auth object.
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
-      httpClient.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+      httpClient.defaults.headers.common["Authorization"] = "Bearer " + token;
     }
 
+    httpClient.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      function (error) {
+        if (error.response.status === 401) {
+          localStorage.removeItem("token");
+          httpClient.defaults.headers.common["Authorization"] = "";
+          history.push("/signin");
+          return Promise.reject(error);
+        }
+        return Promise.reject(error);
+      }
+    );
+
     httpClient
-      .post('me')
+      .post("me")
       .then(({ data }) => {
         if (data.user) {
           setAuthUser(data.user);
@@ -140,8 +159,8 @@ export const useProvideAuth = () => {
         setLoadingUser(false);
       })
       .catch(function (data) {
-        localStorage.removeItem('token');
-        httpClient.defaults.headers.common['Authorization'] = '';
+        localStorage.removeItem("token");
+        httpClient.defaults.headers.common["Authorization"] = "";
         setLoadingUser(false);
       });
   }, []);

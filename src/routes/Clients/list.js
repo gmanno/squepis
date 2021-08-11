@@ -116,7 +116,7 @@ const List = (props) => {
         message.error("Ocorreu um erro");
       }
       setLoading(false);
-    });
+    })
   },[url]);
 
   useEffect(() => {
