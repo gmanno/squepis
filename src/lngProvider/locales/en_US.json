@@ -1,15 +1,19 @@
 {
   "app.announced": "A new version will be released on December 25th. Stay tuned!",
   "sidebar.main": "Main",
-  "sidebar.samplePage": "Sample Page",
   "sidebar.dashboard": "Dashboard",
 
   "sidebar.services": "Services",
-  "sidebar.service_categories": "Services Categories",
-  "routes.add.clients": "Client",
+  "sidebar.service_categories": "Service Categories",
+  "sidebar.vehicles_categories": "Vehicles Categories",
+  "sidebar.scheduling_status": "Scheduling Status",
+  "sidebar.scheduling": "Scheduling",
 
   "sidebar.employees": "Employees",
+
   "sidebar.clients": "Clients",
+  "routes.add.clients": "Client",
+
   "sidebar.account": "My account",
   "sidebar.dashboard.crm": "Crm",
   "sidebar.components": "Components",

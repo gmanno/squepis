@@ -50,11 +50,11 @@ const SidebarContent = ({ sidebarCollapsed, setSidebarCollapsed }) => {
             theme={themeType === THEME_TYPE_LITE ? "lite" : "dark"}
             mode="inline"
           >
-            <Menu.Item key="sample">
-              <Link to="/sample">
+            <Menu.Item key="home">
+              <Link to="/home">
                 <i className="icon icon-widgets" />
                 <span>
-                  <IntlMessages id="sidebar.samplePage" />
+                  <IntlMessages id="sidebar.dashboard" />
                 </span>
               </Link>
             </Menu.Item>
@@ -67,11 +67,36 @@ const SidebarContent = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 </span>
               </Link>
             </Menu.Item>
-            <Menu.Item key="service_categories">
-              <Link to="/service_categories">
+            <Menu.Item key="services">
+              <Link to="/services">
                 <i className="icon icon-extra-components" />
                 <span>
-                  <IntlMessages id="sidebar.service_categories" />
+                  <IntlMessages id="sidebar.services" />
+                </span>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="vehicles_categories">
+              <Link to="/vehicles_categories">
+                <i className="icon icon-map-clustering" />
+                <span>
+                  <IntlMessages id="sidebar.vehicles_categories" />
+                </span>
+              </Link>
+            </Menu.Item>
+
+            <Menu.Item key="scheduling">
+              <Link to="/scheduling">
+                <i className="icon icon-hotel-booking" />
+                <span>
+                  <IntlMessages id="sidebar.scheduling" />
+                </span>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="scheduling_status">
+              <Link to="/scheduling_status">
+                <i className="icon icon-icon" />
+                <span>
+                  <IntlMessages id="sidebar.scheduling_status" />
                 </span>
               </Link>
             </Menu.Item>

@@ -55,6 +55,12 @@ const List = (props) => {
           </Link>
         </Menu.Item>
         <Menu.Item>
+          <Link to={`/services_prices/${rec.id}`}>
+            <i className="icon icon-orders" />
+            <span style={{ paddingLeft: "5px" }}>Preços</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item>
           <i className="icon icon-trash" />
           <span
             style={{ paddingLeft: "5px" }}
@@ -79,16 +85,7 @@ const List = (props) => {
       title: "Duração",
       dataIndex: "duration",
       key: "duration",
-      sorter: (a, b) => a.duration.localeCompare(b.duration),
-    },
-    {
-      title: "Serviços",
-      dataIndex: "_count.services",
-      key: "_count.services",
-      render: (text, rec) => {
-        return rec._count.services;
-      },
-      sorter: (a, b) => a._count.services - b._count.services,
+      sorter: (a, b) => a.duration - b.duration,
     },
     {
       title: "Ações",
@@ -128,7 +125,7 @@ const List = (props) => {
       className="gx-card"
       title={
         <h2 className="title gx-mb-4">
-          <IntlMessages id="sidebar.service_categories" />
+          <IntlMessages id={`sidebar.${url}`} />
         </h2>
       }
       extra={

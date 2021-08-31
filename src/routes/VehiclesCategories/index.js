@@ -5,7 +5,7 @@ import Edit from "./edit";
 import { Route, Switch } from "react-router-dom";
 
 function Index() {
-  const url = "service_categories";
+  const url = "vehicles_categories";
   return (
     <div>
       <Switch>

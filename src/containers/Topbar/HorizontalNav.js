@@ -1,20 +1,20 @@
 import React from "react";
-import {useSelector} from "react-redux";
-import {Menu} from "antd";
-import {Link} from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Menu } from "antd";
+import { Link } from "react-router-dom";
 import IntlMessages from "../../util/IntlMessages";
 import {
   NAV_STYLE_ABOVE_HEADER,
   NAV_STYLE_BELOW_HEADER,
   NAV_STYLE_DEFAULT_HORIZONTAL,
-  NAV_STYLE_INSIDE_HEADER_HORIZONTAL
+  NAV_STYLE_INSIDE_HEADER_HORIZONTAL,
 } from "../../constants/ThemeSetting";
 
 const SubMenu = Menu.SubMenu;
 
 const HorizontalNav = () => {
-  const navStyle = useSelector(({settings}) => settings.navStyle);
-  const {pathname} = useSelector(({common}) => common);
+  const navStyle = useSelector(({ settings }) => settings.navStyle);
+  const { pathname } = useSelector(({ common }) => common);
 
   const getNavStyleSubMenuClass = (navStyle) => {
     switch (navStyle) {
@@ -32,25 +32,29 @@ const HorizontalNav = () => {
   };
 
   const selectedKeys = pathname.substr(1);
-  const defaultOpenKeys = selectedKeys.split('/')[1];
+  const defaultOpenKeys = selectedKeys.split("/")[1];
   return (
     <Menu
       defaultOpenKeys={[defaultOpenKeys]}
       selectedKeys={[selectedKeys]}
-      mode="horizontal">
-      <SubMenu className={getNavStyleSubMenuClass(navStyle)} key="main"
-               title={<IntlMessages id="sidebar.main"/>}>
-        <Menu.Item key="sample">
-          <Link to="/sample"><i className="icon icon-widgets"/>
-            <IntlMessages id="sidebar.samplePage"/></Link>
+      mode="horizontal"
+    >
+      <SubMenu
+        className={getNavStyleSubMenuClass(navStyle)}
+        key="main"
+        title={<IntlMessages id="sidebar.main" />}
+      >
+        <Menu.Item key="home">
+          <Link to="/home">
+            <i className="icon icon-widgets" />
+            <IntlMessages id="sidebar.dashboard" />
+          </Link>
         </Menu.Item>
       </SubMenu>
     </Menu>
-
   );
 };
 
 HorizontalNav.propTypes = {};
 
 export default HorizontalNav;
-

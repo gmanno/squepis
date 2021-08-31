@@ -3,6 +3,7 @@ import { Form, Input, Card, Button, message } from "antd";
 import { useIntl } from "react-intl";
 import { httpClient } from "util/Api";
 import { cpfMask, phoneMask } from "util/masks";
+import { cpf } from "cpf-cnpj-validator";
 
 const formItemLayout = {
   labelCol: {
@@ -41,7 +42,7 @@ const Add = (props) => {
         form.resetFields();
         props.history.push(`/${url}`);
       } else {
-        message.error("Ocorreu um erro");
+        message.error(data.message);
       }
       setLoading(false);
     });
@@ -106,9 +107,13 @@ const Add = (props) => {
           rules={[
             {
               required: true,
-              message: `Insira o cpf do ${intl.formatMessage({
+              message: `CPF do ${intl.formatMessage({
                 id: `routes.add.${url}`,
-              })}`,
+              })} inválido`,
+              validator: (rule, num) =>
+                cpf.isValid(num)
+                  ? Promise.resolve()
+                  : Promise.reject(new Error()),
             },
           ]}
         >

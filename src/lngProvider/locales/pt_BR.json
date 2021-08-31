@@ -4,12 +4,27 @@
   "sidebar.main": "Principal",
   "sidebar.samplePage": "Dashboard",
   "sidebar.dashboard": "Dashboard",
+
   "sidebar.services": "Serviços",
+  "routes.add.services": "Serviço",
+
   "sidebar.service_categories": "Tipos de Serviço",
-  "sidebar.employees": "Funcionários",
+  "routes.add.service_categories": "Tipo de Serviço",
+
+  "sidebar.vehicles_categories": "Tipos de Veículos",
+  "routes.add.vehicles_categories": "Tipo de Veículo",
+
+  "sidebar.scheduling_status": "Status de agendamentos",
+  "routes.add.scheduling_status": "Status de agendamento",
+
+  "sidebar.scheduling": "Agendamentos",
+  "routes.add.scheduling": "Agendamento",
+
   "sidebar.account": "Minha conta",
+
   "sidebar.clients": "Clientes",
   "routes.add.clients": "Cliente",
+
   "sidebar.dashboard.crm": "Crm",
   "sidebar.components": "Components",
   "sidebar.components.general": "General",

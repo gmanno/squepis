@@ -46,7 +46,7 @@ const Add = (props) => {
   };
 
   return (
-    <Card className="gx-card" title="Adicionar novo tipo de serviço">
+    <Card className="gx-card" title="Adicionar novo registro">
       <Form
         {...formItemLayout}
         form={form}
@@ -60,19 +60,7 @@ const Add = (props) => {
           rules={[
             {
               required: true,
-              message: "Insira o nome do tipo de serviço",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name="duration"
-          label="Duração (em minutos) "
-          rules={[
-            {
-              required: true,
-              message: "Insira a duração do serviço em minutos",
+              message: "Insira o nome do registro",
             },
           ]}
         >

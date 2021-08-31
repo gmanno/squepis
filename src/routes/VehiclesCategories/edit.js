@@ -68,7 +68,7 @@ const Edit = (props) => {
   }, [getRecord]);
 
   return (
-    <Card className="gx-card" title="Adicionar novo tipo de serviço">
+    <Card className="gx-card" title="Adicionar novo status">
       <Form
         {...formItemLayout}
         form={form}
@@ -82,25 +82,12 @@ const Edit = (props) => {
           rules={[
             {
               required: true,
-              message: "Insira o nome do tipo de serviço",
+              message: "Insira o nome do status",
             },
           ]}
         >
           <Input />
         </Form.Item>
-        <Form.Item
-          name="duration"
-          label="Duração (em minutos) "
-          rules={[
-            {
-              required: true,
-              message: "Insira a duração do serviço em minutos",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit" loading={loading}>
             Salvar

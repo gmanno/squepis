@@ -163,7 +163,7 @@ export const useProvideAuth = () => {
         httpClient.defaults.headers.common["Authorization"] = "";
         setLoadingUser(false);
       });
-  }, []);
+  }, [history]);
 
   // Return the user object and auth methods
   return {
