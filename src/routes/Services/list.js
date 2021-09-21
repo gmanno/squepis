@@ -82,12 +82,6 @@ const List = (props) => {
       sorter: (a, b) => a.name.localeCompare(b.name),
     },
     {
-      title: "Duração",
-      dataIndex: "duration",
-      key: "duration",
-      sorter: (a, b) => a.duration - b.duration,
-    },
-    {
       title: "Ações",
       render: (text, record) => (
         <div>
