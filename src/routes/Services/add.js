@@ -37,15 +37,15 @@ const Add = (props) => {
     httpClient.get(`vehicles_categories`).then(({ status, data }) => {
       if (status === 200) {
         let content = [];
-        data.forEach((element, i) => {
+        data.forEach(({ name, id }, i) => {
           content.push(
             <>
               <Col lg={24} md={24} sm={24} xs={24}>
-                <h4>{element.name}:</h4>
+                <h4>{name}:</h4>
               </Col>
               <Col lg={12} md={12} sm={12} xs={12}>
                 <Form.Item
-                  name={`service_price[${i}]duration`}
+                  name={["service_price", id, "duration"]}
                   label="Duração"
                   rules={[
                     {
@@ -60,7 +60,7 @@ const Add = (props) => {
               <Col lg={12} md={12} sm={12} xs={12}>
                 <Form.Item
                   label="Preço"
-                  name={`service_price[${i}]value`}
+                  name={["service_price", id, "value"]}
                   rules={[
                     {
                       required: true,
@@ -88,7 +88,17 @@ const Add = (props) => {
 
   const onFinish = (values) => {
     setLoading(true);
-    httpClient.post(url, values).then(({ status, data }) => {
+    let prices = []
+    Object.keys(values.service_price).forEach(id=>{
+      prices.push( {
+        vehicleCategoryId: id,
+        ...values.service_price[id]
+      });
+    })
+     
+     
+    // console.log(prices)
+    httpClient.post(url, {...values, service_price: prices}).then(({ status, data }) => {
       if (status === 201) {
         message.success(data.message);
         props.history.push(`/${url}`);
