@@ -92,12 +92,10 @@ const Add = (props) => {
     Object.keys(values.service_price).forEach(id=>{
       prices.push( {
         vehicleCategoryId: id,
-        ...values.service_price[id]
+        duration: parseInt(values.service_price[id].duration),
+        value: parseFloat(values.service_price[id].value),
       });
     })
-     
-     
-    // console.log(prices)
     httpClient.post(url, {...values, service_price: prices}).then(({ status, data }) => {
       if (status === 201) {
         message.success(data.message);
